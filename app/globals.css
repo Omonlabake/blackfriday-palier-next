@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-papier: #f2f4f8;
+  --color-encre: #0b1020;
+  --color-bleu: #2340ff;
+  --color-bleu-fonce: #1428c4;
+  --color-orange: #ff5a1f;
+  --color-menthe: #12b76a;
+  --color-gris: #5b6478;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-titre: var(--font-space), system-ui, sans-serif;
+  --font-texte: var(--font-manrope), system-ui, sans-serif;
+  --font-prix: var(--font-jetbrains), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+}
+
+:focus-visible {
+  outline: 3px solid #ff5a1f;
+  outline-offset: 3px;
+}
+
+.quadrillage {
+  background-image:
+    linear-gradient(to right, rgba(11, 16, 32, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 16, 32, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .palier-actuel {
+    animation: halo 2.2s ease-in-out infinite;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @keyframes halo {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 90, 31, 0.55); }
+    50% { box-shadow: 0 0 0 10px rgba(255, 90, 31, 0); }
+  }
+
+  .prix-chute {
+    animation: chute 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  @keyframes chute {
+    from { transform: translateY(-14px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .pastille-live {
+    animation: clignote 1.4s ease-in-out infinite;
+  }
+
+  @keyframes clignote {
+    50% { opacity: 0.25; }
+  }
 }
